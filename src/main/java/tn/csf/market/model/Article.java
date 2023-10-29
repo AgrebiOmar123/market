@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;  
  
 @Entity  
@@ -22,6 +24,10 @@ public class Article {
 	private double price; 
 	@Column  
 	private int quantity;
+	@ManyToOne(optional=false) //champ obligatoire
+	@JoinColumn(name="idcategory", referencedColumnName="id")
+	private Category category;
+
 	public int getId() {
 		return id;
 	}
@@ -46,10 +52,19 @@ public class Article {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity + "]";
+		return "Article [id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", category="
+				+ category + "]";
 	}
+	
 	
 	
 }
